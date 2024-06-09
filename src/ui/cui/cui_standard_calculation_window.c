@@ -101,14 +101,15 @@ void CUI_STANDARD_CALCULATION_WINDOW_HandleUserInput(void) {
     char response[NETWORK_MAX_STREAM_SIZE];
     /* Tao chuoi theo dung dinh dang va luu vao request, goi y su dung ham sprintf */
     // Dinh dang can luu: {request:<lenh>,value:{<r> + <i>i,<r> + <i>i}}  (xem them trong README.md muc 2.5.2)
-    // Dien code tai day
+   
     sprintf(request, "{request:%s,value:{%.15g + %.15gi,%.15g + %.15gi}}", command, data.z1.real, data.z1.imagine, data.z2.real, data.z2.imagine);
     
     /* Gui yeu cau ve may chu xu ly */
     // 1. Su dung ham CLIENT_OpenNetwork mo ket noi toi may chu da co cac ham xu ly cho backend. Danh sach may chu nam trong file server.c dong 9
     // 2. Su dung ham CLIENT_Request gui request va nhan lai phan hoi vao response
     // 3. Su dung hàm CLIENT_CloseNetwork de dong ket noi
-    
+    CLIENT_OpenNetwork(&client, "server.uk.com");
+    CLIENT_Request(&client, request, response);
     cui_standardcalculation_window_data.result = CUI_STANDARD_CALCULATION_WINDOW_ExtractData(response);
     CUI_STANDARD_CALCULATION_WINDOW_DisplayResult();
 }
@@ -119,6 +120,8 @@ void CUI_STANDARD_CALCULATION_WINDOW_DisplayResult(void) {
     {
     case CHAR_PLUS:
     case CHAR_SUBTRACT:
+    case CHAR_MULTIPLY:
+    case CHAR_DIVIDE:
         printf("\nResult: (%.15g + %.15g.i) %c (%.15g + %.15g.i) = %.15g + %.15g.i\n", 
             data.z1.real, data.z1.imagine, 
             data.op, 
@@ -134,11 +137,11 @@ void CUI_STANDARD_CALCULATION_WINDOW_DisplayResult(void) {
 
 complex_t CUI_STANDARD_CALCULATION_WINDOW_ExtractData(const char* data_stream) {
     complex_t number;
-    
+    char domain[30];
     /* Biet du lieu duoc tra vao vao data_stream. Tach cac truong du lieu va gan vao bien number */ 
     // Dinh dang data_stream: {domain:<ten mien>,value:{<r> + <i>i}}
     // VD: {domain:"server.vn.com",value:{1.234324 + -42895.2532i}}
-    // Dien code tai day
+    sscanf(data_stream, "{domain:%[^,],value:{%lf + %lfi,%lf + %lfi}}", domain, &number.real, &number.imagine);
 
     return number;
 }

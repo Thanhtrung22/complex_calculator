@@ -13,8 +13,8 @@ bool CLIENT_OpenNetwork(client_t* p_client, const char* domain) {
 
 void CLIENT_Request(client_t* p_client, const char* request, char* response) {
     /* Copy request vao network_stream duoc luu tru trong p_client */
-    // Dien code tai day
-
+    p_client->network_stream = (char*) request;
+    
     NETWORK_ExchangeData(p_client->network_id);
     strcpy(response, p_client->network_stream);
 }

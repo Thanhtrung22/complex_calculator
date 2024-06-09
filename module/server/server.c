@@ -52,10 +52,10 @@ void SERVER_HandleRequest(server_t* p_server, const char* request, char* respons
     complex_t result;
     for (int i = 0; p_server->handler[i].standard_calculation_handle != NULL; i++) {
         /* Kiem tra req co trung voi command nao co san trong p_server khong, neu co thi thuc hien tinh toan dua tren handler da co san trong p_server */
-        // Bo comment va hoan thien not dieu kien if
-        // if (...) {
-        //     result = ...;
-        // }
+       
+        if (strcmp(req, p_server->handler[i].command) == 0) {
+            result = p_server->handler[i].standard_calculation_handle(z1, z2);
+        }
     }
 
     sprintf(response, "{domain:%s,value:{%.15g + %.15gi}}", p_server->domain_name, result.real, result.imagine);
