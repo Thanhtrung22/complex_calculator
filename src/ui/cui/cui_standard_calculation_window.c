@@ -91,6 +91,13 @@ void CUI_STANDARD_CALCULATION_WINDOW_HandleUserInput(void) {
     case CHAR_SUBTRACT:
         strcpy(command, "subtract");
         break;
+    case CHAR_MULTIPLY:
+        strcpy(command, "multiply");
+        break;
+    case CHAR_DIVIDE:
+        strcpy(command, "divide");
+        break;
+    
     
     default:
         break;
@@ -141,7 +148,7 @@ complex_t CUI_STANDARD_CALCULATION_WINDOW_ExtractData(const char* data_stream) {
     /* Biet du lieu duoc tra vao vao data_stream. Tach cac truong du lieu va gan vao bien number */ 
     // Dinh dang data_stream: {domain:<ten mien>,value:{<r> + <i>i}}
     // VD: {domain:"server.vn.com",value:{1.234324 + -42895.2532i}}
-    sscanf(data_stream, "{domain:%[^,],value:{%lf + %lfi,%lf + %lfi}}", domain, &number.real, &number.imagine);
+    sscanf(data_stream, "{domain:%[^,],value:{%lf + %lfi}}", domain, &number.real, &number.imagine);
 
     return number;
 }
