@@ -11,9 +11,10 @@ void APP_MANAGER_Init(void) {
     ui_config_t ui_config = {
         .window_main_launch = CUI_MAIN_WINDOW_Launch,
         .window_standard_calculation_launch = CUI_STANDARD_CALCULATION_WINDOW_Launch,
-        .window_module_launch = NULL,
+        .window_module_launch = CUI_MODULE_COMPLEX_WINDOW_Launch,
         .window_exit_launch = CUI_EXIT_WINDOW_Launch
     };
+    
 
     EVENT_MANAGER_Constructor();
     UI_Constructor(&p_ui_handler, &ui_config);
@@ -38,7 +39,10 @@ void APP_MANAGER_Launch(void) {
         if (EVENT_MANAGER_GetSignal_StandardCalculationWindow()) {
             UI_STANDARD_CALCULATION_WINDOW_Launch(p_ui_handler);
         }
-        
+        if(EVENT_MANAGER_GetSignal_ModuleComplexWindow())
+        {
+            UI_MODULE_WINDOW_Launch(p_ui_handler);
+        }
         if (EVENT_MANAGER_GetSignal_Exit()) {
             UI_EXIT_WINDOW_Launch(p_ui_handler);
             if(EVENT_MANAGER_GetSignal_Exit())

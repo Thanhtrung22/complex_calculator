@@ -1,4 +1,4 @@
-BUILD_CMD=gcc main.c module/client/client.c module/server/server.c module/network/network.c src/app_manager.c src/event_manager.c src/ui/ui.c src/ui/cui/cui_main_window.c src/ui/cui/cui_standard_calculation_window.c src/ui/cui/cui_exit_window.c src/ui/cui/utility/cui_input_validation.c src/backend/standard_calculation.c -o build/complex-calculator -Iinc -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wconversion -Wnull-dereference -Wsign-conversion -g -O0
+BUILD_CMD=gcc main.c module/client/client.c module/server/server.c module/network/network.c src/app_manager.c src/event_manager.c src/ui/ui.c src/ui/cui/cui_module_complex_window.c src/ui/cui/cui_main_window.c src/ui/cui/cui_standard_calculation_window.c src/ui/cui/cui_exit_window.c src/ui/cui/utility/cui_input_validation.c src/backend/standard_calculation.c src/backend/module_complex.c -o build/complex-calculator -Iinc -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wconversion -Wnull-dereference -Wsign-conversion -g -O0
 
 # Detect the operating system
 UNAME_S := $(shell uname -s)

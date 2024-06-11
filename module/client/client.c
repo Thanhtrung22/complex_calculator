@@ -11,11 +11,11 @@ bool CLIENT_OpenNetwork(client_t* p_client, const char* domain) {
     return true;
 }
 
-void CLIENT_Request(client_t* p_client, const char* request, char* response) {
+void CLIENT_Request(client_t* p_client, const char* request, char* response, char* command) {
     /* Copy request vao network_stream duoc luu tru trong p_client */
     p_client->network_stream = (char*) request;
 
-    NETWORK_ExchangeData(p_client->network_id);
+    NETWORK_ExchangeData(p_client->network_id, command);
     strcpy(response, p_client->network_stream);
 }
 

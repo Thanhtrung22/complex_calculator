@@ -40,3 +40,13 @@ bool EVENT_MANAGER_GetSignal_StandardCalculationWindow(void) {
 void EVENT_MANAGER_TriggerSignal_StandardCalculationWindow(void) {
     event_manager_event.signal_standard_calculation_window = true;
 }
+
+bool EVENT_MANAGER_GetSignal_ModuleComplexWindow(void) {
+    bool signal = event_manager_event.signal_module_complex_window;
+    event_manager_event.signal_module_complex_window = false;
+    return signal;
+}
+
+void EVENT_MANAGER_TriggerSignal_ModuleComplexnWindow(void) {
+    event_manager_event.signal_module_complex_window = true;
+}

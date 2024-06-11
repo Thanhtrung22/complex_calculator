@@ -9,6 +9,7 @@
 typedef struct {
     char command[SERVER_REQUEST_MAX_CMD_SIZE];
     complex_t (*standard_calculation_handle) (complex_t z1, complex_t z2);
+    double (*module_complex)(complex_t z);
 } server_request_handle_t;
 
 typedef struct {
@@ -29,4 +30,7 @@ typedef struct {
     char network_stream[NETWORK_MAX_STREAM_SIZE];
 } network_t;
 
+
+
 #endif
+

@@ -116,7 +116,7 @@ void CUI_STANDARD_CALCULATION_WINDOW_HandleUserInput(void) {
     // 2. Su dung ham CLIENT_Request gui request va nhan lai phan hoi vao response
     // 3. Su dung hàm CLIENT_CloseNetwork de dong ket noi
     CLIENT_OpenNetwork(&client, "server.uk.com");
-    CLIENT_Request(&client, request, response);
+    CLIENT_Request(&client, request, response, command);
     cui_standardcalculation_window_data.result = CUI_STANDARD_CALCULATION_WINDOW_ExtractData(response);
     CUI_STANDARD_CALCULATION_WINDOW_DisplayResult();
 }

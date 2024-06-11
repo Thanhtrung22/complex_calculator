@@ -11,6 +11,6 @@ void NETWORK_Open(client_t* p_client, const char* domain);
 void NETWORK_Connect(server_t* p_server, client_t* p_client);
 void NETWORK_Close(client_t* p_client);
 
-void NETWORK_ExchangeData(int network_id);
+void NETWORK_ExchangeData(int network_id, char* command);
 
 #endif

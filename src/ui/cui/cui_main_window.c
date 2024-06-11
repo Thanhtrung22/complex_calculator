@@ -39,7 +39,9 @@ void CUI_MAIN_WINDOW_HandleUserInput(void) {
     case 1:
         EVENT_MANAGER_TriggerSignal_StandardCalculationWindow();
         break;
-
+    case 2:
+        EVENT_MANAGER_TriggerSignal_ModuleComplexnWindow();
+        break;
     case 3:
         EVENT_MANAGER_TriggerSignal_ExitWindow();
         break;
