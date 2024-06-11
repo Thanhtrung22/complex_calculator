@@ -1,7 +1,7 @@
 #include "server.h"
 
-#include "backend/standard_calculation.h"
 #include "backend/module_complex.h"
+#include "backend/standard_calculation.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,7 +35,8 @@ static server_t server_list[] = {
     {.domain_name = "server.vn.com"}};
 
 static int server_list_size = sizeof(server_list) / sizeof(server_list[0]);
-
+static int handler_list_size =
+    sizeof(server_list[0].handler) / sizeof(server_list[0].handler[0]);
 server_t *SERVER_GetServerList(void) { return server_list; }
 
 int SERVER_GetServerListSize(void) { return server_list_size; }
@@ -50,16 +51,16 @@ void SERVER_HandleRequest_StandardCalculation(server_t *p_server,
            &z1.real, &z1.imagine, &z2.real, &z2.imagine);
 
     complex_t result;
-        printf("\nre: %s", req);
+    printf("\nre: %s", req);
 
-    for (int i = 0; i < server_list_size; i++)
+    for (int i = 0; p_server->handler[i].standard_calculation_handle != NULL;
+         i++)
     {
         /* Kiem tra req co trung voi command nao co san trong p_server khong,
          * neu co thi thuc hien tinh toan dua tren handler da co san trong
          * p_server */
 
-        if (strcmp(req, p_server->handler[i].command) == 0 &&
-            (p_server->handler[i].standard_calculation_handle != NULL))
+        if (strcmp(req, p_server->handler[i].command) == 0)
         {
 
             result = p_server->handler[i].standard_calculation_handle(z1, z2);
@@ -74,23 +75,25 @@ void SERVER_HandleRequest_ModuleCalculation(server_t *p_server,
 {
     char req[200];
     complex_t z1;
+    printf("\nsiz: %d", handler_list_size);
+
     printf("\nRequest: %s", request);
     sscanf(request, "{request:%[^,],value:{%lf + %lfi}}", req, &z1.real,
            &z1.imagine);
     printf("\nre: %s", req);
     double result = 0;
-    result = p_server->handler[4].module_complex(z1);
-    // for (int i = 0; i < server_list_size; i++)
-    // {
-    //     /* Kiem tra req co trung voi command nao co san trong p_server khong,
-    //      * neu co thi thuc hien tinh toan dua tren handler da co san trong
-    //      * p_server */
+    for (int i = 0; i < handler_list_size; i++)
+    {
+        /* Kiem tra req co trung voi command nao co san trong p_server khong,
+         * neu co thi thuc hien tinh toan dua tren handler da co san trong
+         * p_server */
 
-    //     if (strcmp(req, p_server->handler[i].command) == 0)
-    //     {
-    //         result = p_server->handler[i].module_complex(z1);
-    //     }
-    // }
+        if (strcmp(req, p_server->handler[i].command) == 0)
+        {
+            result = p_server->handler[i].module_complex(z1);
+            break;
+        }
+    }
     sprintf(response, "{domain:%s,value:{%.15g}}", p_server->domain_name,
             result);
 }

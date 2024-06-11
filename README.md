@@ -159,3 +159,9 @@ Thư mục ".vscode" chứa các file đã cấu hình sẵn IntelliSense Visual
 - Nếu chỉ muốn biên dịch: `make build`
 - Nếu chỉ muốn chạy: `make run`
 
+## 5. Một số lỗi có thể hay gặp
+- Quên ghi vào makefile các file mình mới tạo, giả sử như file module_complex.c => dẫn đến compiler không biết file đó để biên dịch
+- Khi chạy chương trình thì sẽ bắt đầu từ hàm main, do vậy các câu lệnh nhập xuất không nằm ở hàm nào
+  trong các file mà chỉ nằm riêng lẻ trong file con sẽ không được in hay thực hiện, hoặc hàm không được gọi trong main cũng thế
+- Trong file server.c, có server_list_size, nếu ta cho vòng lặp chạy từ i đến server_list_size thì sẽ không thể chạy được các 
+  trường hợp của handler do handler có size lớn hơn server_list_size
