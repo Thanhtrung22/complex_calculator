@@ -5,6 +5,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "cui_common.h"
 
+typedef struct
+{
+    bool flag_check;
+    char answer;
+} cui_exit_window_data_t;
 
 /* Structure Declaration -----------------------------------------------------*/
 

@@ -24,7 +24,26 @@ int CUI_INPUT_VALIDATION_GetModeFromUser(void) {
 
     return mode;
 }
+char CUI_INPUT_VALIDATION_GetAnswer(char *message)
+{
+    bool input_is_valid = false;
+    char answer = 0;
 
+    do
+    {
+        input_is_valid = true;
+        printf("\n%s",message);
+        scanf("%c",&answer);
+        while(getchar() != '\n');
+        if(answer != 'y' && answer != 'n')
+        {
+            printf("\nSorry, try again");
+            input_is_valid = false;
+        }
+
+    }while(!input_is_valid);
+    return answer;
+}
 double CUI_INPUT_VALIDATION_GetDoubleFromUser(const char* input_prompt_msg) {
     double number;
     int number_of_received_input = 0;

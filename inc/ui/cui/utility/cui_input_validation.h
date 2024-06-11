@@ -10,5 +10,5 @@
 int CUI_INPUT_VALIDATION_GetModeFromUser(void);
 double CUI_INPUT_VALIDATION_GetDoubleFromUser(const char* input_prompt_msg);
 math_operator_t CUI_INPUT_VALIDATION_GetOperatorFromUser(const char* input_prompt_msg);
-
+char CUI_INPUT_VALIDATION_GetAnswer(char *message);
 #endif /* CUI_INPUT_VALIDATION_H */

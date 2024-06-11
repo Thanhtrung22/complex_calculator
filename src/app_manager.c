@@ -41,7 +41,10 @@ void APP_MANAGER_Launch(void) {
         
         if (EVENT_MANAGER_GetSignal_Exit()) {
             UI_EXIT_WINDOW_Launch(p_ui_handler);
-            WindowShouldClose = true;
+            if(EVENT_MANAGER_GetSignal_Exit())
+            {
+                WindowShouldClose = true;
+            }
         }
     }
 }
