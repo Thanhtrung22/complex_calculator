@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "backend/standard_calculation.h"
-#include "data_structure.h"
 
 static server_t server_list[] = {
     {

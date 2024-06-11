@@ -6,5 +6,6 @@
 #include "ui/cui/cui_main_window.h"
 #include "ui/cui/cui_standard_calculation_window.h"
 #include "ui/cui/cui_exit_window.h"
+#include "ui/cui/cui_module_complex_window.h"
 
 #endif /* CUI_H */
